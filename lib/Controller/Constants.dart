@@ -16,8 +16,8 @@
 
     class ProductsNewOrder {
         static const getItem  = "${Constants.apiUrl}import.php?FLAG=1";
-        static const getItemByBarcode  = "${Constants.apiUrl}/export.php";
-        static const addVoucher  = "${Constants.apiUrl}/export.php";
+        static const getItemByBarcode  = "${Constants.apiUrl}export.php";
+        static const addVoucher  = "${Constants.apiUrl}export.php";
     }
 
     class items {

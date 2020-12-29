@@ -56,10 +56,13 @@ class _CartListState extends State<CartList> {
     ).show();
   }
 
-  void addVoucher (String jsonUserStore){
+  void addVoucher (List<UsersStores> jsonUserStore){
     API.addVoucher(jsonUserStore).then((response) {
       if(response.statusCode == 200) {
         notificationSuccessfully(context);
+        print("response.body = ${response.body.toString()}");
+        log('response.body =  ${response.body.toString()}');
+
       }
     });
   }
@@ -102,7 +105,8 @@ class _CartListState extends State<CartList> {
     ListUsersStores listUserStore = new ListUsersStores(uSERSTORES:listValue);
     String jsonUserStore = jsonEncode(listUserStore);
     log(jsonUserStore);
-    addVoucher(jsonUserStore);
+    // addVoucher(jsonUserStore);
+    addVoucher(listValue);
   }
   @override
   void initState() {

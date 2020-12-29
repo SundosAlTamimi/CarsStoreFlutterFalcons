@@ -10,6 +10,7 @@ import 'package:stores_app/View/SaleInv.dart';
 import 'package:morpheus/morpheus.dart';
 import '../app_localizations.dart';
 import 'cart.dart';
+import 'drawer.dart';
 import 'loader/Loader.dart';
 import 'loader/dot_type.dart';
 
@@ -67,6 +68,15 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer:ClipPath(
+        // clipper: OvalRightBorderClipper(),
+        child: Container(
+          width: 250.0,
+          child: Drawer(
+            child: AppDrawer(),
+          ),
+        ),
+      ),
       backgroundColor: Colors.white70,
       appBar: _appBars[_currentIndex],
       body:  MorpheusTabView(

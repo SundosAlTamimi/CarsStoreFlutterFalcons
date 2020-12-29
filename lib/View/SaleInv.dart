@@ -102,11 +102,12 @@ class SaleInvState extends State<SaleInv> {
   }
 
   void addVoucher (String jsonUserStore){
-    API.addVoucher(jsonUserStore).then((response) {
-      if(response.statusCode == 200) {
-          notificationSuccessfully(context);
-      }
-    });
+    // API.addVoucher(jsonUserStore).then((response) {
+    //   if(response.statusCode == 200) {
+    //       notificationSuccessfully(context);
+    //       print("response.body = ${response.body.toString()}");
+    //   }
+    // });
   }
 
   void notContainsItem(){

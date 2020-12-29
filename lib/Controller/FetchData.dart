@@ -40,10 +40,13 @@ class API {
      return res;
    }
 
-   static Future addVoucher(String vouchers) async {
-     final res = await http.post(ProductsNewOrder.addVoucher , body: vouchers);
+   static Future addVoucher(List<UsersStores> vouchers) async {
+     var body = {"ADD_VOUCHER": vouchers.toString()};
+     final res = await http.post(ProductsNewOrder.addVoucher , body: body);
      print(ProductsNewOrder.addVoucher);
      print(res.statusCode);
+     print(vouchers);
+     print("response.body = " + res.body.toString());
      return res;
    }
 
