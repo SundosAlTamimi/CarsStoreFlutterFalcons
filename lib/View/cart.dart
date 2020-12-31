@@ -56,13 +56,22 @@ class _CartListState extends State<CartList> {
     ).show();
   }
 
-  void addVoucher (List<UsersStores> jsonUserStore){
+  // void addVoucher (List<UsersStores> jsonUserStore){
+  //   API.addVoucher(jsonUserStore).then((response) {
+  //     if(response.statusCode == 200) {
+  //       notificationSuccessfully(context);
+  //       print("response.body = ${response.body.toString()}");
+  //       log('response.body =  ${response.body.toString()}');
+  //
+  //     }
+  //   });
+  // }
+
+  void addVoucher (String jsonUserStore){
     API.addVoucher(jsonUserStore).then((response) {
       if(response.statusCode == 200) {
         notificationSuccessfully(context);
         print("response.body = ${response.body.toString()}");
-        log('response.body =  ${response.body.toString()}');
-
       }
     });
   }
@@ -102,11 +111,11 @@ class _CartListState extends State<CartList> {
 
   void checkOut(){
     addVoucherTotal();
-    ListUsersStores listUserStore = new ListUsersStores(uSERSTORES:listValue);
-    String jsonUserStore = jsonEncode(listUserStore);
+    // ListUsersStores listUserStore = new ListUsersStores(uSERSTORES:listValue);
+    String jsonUserStore = jsonEncode(listValue);
     log(jsonUserStore);
     // addVoucher(jsonUserStore);
-    addVoucher(listValue);
+    addVoucher(jsonUserStore);
   }
   @override
   void initState() {

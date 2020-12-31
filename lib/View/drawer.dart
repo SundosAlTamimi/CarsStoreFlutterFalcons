@@ -1,9 +1,5 @@
-import 'dart:convert';
-import 'dart:io';
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../app_localizations.dart';
 
 class AppDrawer extends StatefulWidget {
   @override
@@ -13,7 +9,6 @@ class AppDrawer extends StatefulWidget {
 class AppDrawerState extends State<AppDrawer> {
   String logText = '';
   IconData logIcon ;
-  bool _visableLoggedIn = false;
 
   @override
   void initState() {
@@ -36,7 +31,7 @@ class AppDrawerState extends State<AppDrawer> {
                 )),
             currentAccountPicture: CircleAvatar(
               backgroundImage: NetworkImage(
-                  'https://avatars2.githubusercontent.com/u/2400215?s=120&v=4'),
+                  'https://cdn.pixabay.com/photo/2018/08/28/12/41/avatar-3637425_960_720.png'),
             ),
             // accountEmail: Text(""),
             accountName: Text("Omar Amarnah"), accountEmail: null,
@@ -45,73 +40,11 @@ class AppDrawerState extends State<AppDrawer> {
           child: ListView(
             shrinkWrap: true,
             children: <Widget>[
-              // Visibility(
-              //   visible: _visableLoggedIn,
-              //   child: Column(
-              //     children: [
-              //       InkWell(
-              //         onTap: () {
-              //           Navigator.pop(context);
-              //           Navigator.pushNamed(context, '/myAccount');
-              //         },
-              //         child: Container(
-              //           height: 90,
-              //           alignment: Alignment.center,
-              //           decoration: BoxDecoration(
-              //               shape: BoxShape.circle,
-              //               gradient: LinearGradient(
-              //                   colors: [Colors.orange, Colors.deepOrange])),
-              //           child: CircleAvatar(
-              //             radius: 40,
-              //             backgroundImage:
-              //             AssetImage("assets/images/drawer-header.jpg"),
-              //           ),
-              //         ),
-              //       ),
-              //       SizedBox(height: 5.0),
-              //       Container(
-              //         alignment: Alignment.center,
-              //         child: Padding(
-              //           padding: const EdgeInsets.only(left: 28.0, right: 25.0),
-              //           child: Row(
-              //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //             children: <Widget>[
-              //               InkWell(
-              //                 onTap: () {
-              //                   Navigator.pop(context);
-              //                   Navigator.pushNamed(context, '/myAccount');
-              //                 },
-              //                 child: Text(
-              //                   "ProductService.nameUser",
-              //                   style: TextStyle(
-              //                       color: Colors.black,
-              //                       fontSize: 18.0,
-              //                       fontWeight: FontWeight.w600),
-              //                 ),
-              //               ),
-              //               IconButton(
-              //                 icon: Icon(
-              //                   Icons.edit,
-              //                   size: 20,
-              //                 ),
-              //                 onPressed: () {
-              //                   Navigator.pop(context);
-              //                   Navigator.pushNamed(context, '/myAccount');
-              //                 },
-              //               ),
-              //             ],
-              //           ),
-              //         ),
-              //       ),
-              //       //SizedBox(height: 30.0),
-              //     ],
-              //   ),
-              // ),
               ListTile(
                 leading: Icon(Icons.home, color: Theme
                     .of(context)
                     .accentColor),
-                title: Text('Home'),
+                title: Text(AppLocalizations.of(context).translate('Home')),
                 onTap: () {
                   //Navigator.pop(context);
                   Navigator.pushReplacementNamed(context, '/');
@@ -122,8 +55,19 @@ class AppDrawerState extends State<AppDrawer> {
                     color: Theme
                         .of(context)
                         .accentColor),
-                title: Text('My Orders'),
+                title: Text(AppLocalizations.of(context).translate('MyOrders')),
                 onTap: () {
+                  Navigator.pushNamed(context, '/myOrder');
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.article_outlined,
+                    color: Theme
+                        .of(context)
+                        .accentColor),
+                title: Text(AppLocalizations.of(context).translate('SalesInvoice')),
+                onTap: () {
+                  Navigator.pushNamed(context, '/orderSalesInvoice');
                 },
               ),
               Divider(),
@@ -132,7 +76,7 @@ class AppDrawerState extends State<AppDrawer> {
                     color: Theme
                         .of(context)
                         .accentColor),
-                title: Text('Languages'),
+                title: Text(AppLocalizations.of(context).translate('Languages')),
                 onTap: () {
                 },
               ),

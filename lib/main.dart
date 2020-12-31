@@ -5,7 +5,9 @@ import 'package:stores_app/View/SaleInv.dart';
 import 'Controller/ProductService.dart';
 import 'View/Auth.dart';
 import 'View/Home.dart';
+import 'View/MyOrders.dart';
 import 'View/Product_detail.dart';
+import 'View/SalesInvoice.dart';
 import 'View/cart.dart';
 import 'app_localizations.dart';
 
@@ -16,7 +18,7 @@ void main() {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             primaryColor: Colors.lightGreen,
-            accentColor: Colors.lightBlue[900],
+            accentColor: Colors.lightGreen,
             fontFamily: locale.languageCode == 'ar' ? 'Dubai' : 'Lato'),
         supportedLocales: [
             Locale('en', 'US'),
@@ -57,6 +59,9 @@ void main() {
             '/newOrder': (BuildContext context) => NewOrder(),
             '/productDetails': (BuildContext context) => ProductDetails.c(),
             '/cart': (BuildContext context) => CartList(),
+            '/myOrder': (BuildContext context) => MyOrders(),
+            '/orderSalesInvoice': (BuildContext context) => OrderSalesInvoice(),
+
         },
       ),
     );

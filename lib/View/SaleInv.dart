@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:delayed_display/delayed_display.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:stores_app/Controller/FetchData.dart';
 import 'package:stores_app/Module/ItemCode.dart';
@@ -101,13 +102,22 @@ class SaleInvState extends State<SaleInv> {
     });
   }
 
-  void addVoucher (String jsonUserStore){
-    // API.addVoucher(jsonUserStore).then((response) {
-    //   if(response.statusCode == 200) {
-    //       notificationSuccessfully(context);
-    //       print("response.body = ${response.body.toString()}");
-    //   }
-    // });
+  // void addVoucher (List<ItemCode> jsonUserStore){
+  //   API.addVoucher(jsonUserStore).then((response) {
+  //     if(response.statusCode == 200) {
+  //         notificationSuccessfully(context);
+  //         print("response.body = ${response.body.toString()}");
+  //     }
+  //   });
+  // }
+
+    void addVoucher (String jsonUserStore){
+    API.addVoucher(jsonUserStore).then((response) {
+      if(response.statusCode == 200) {
+        notificationSuccessfully(context);
+        print("response.body = ${response.body.toString()}");
+      }
+    });
   }
 
   void notContainsItem(){
@@ -169,6 +179,7 @@ class SaleInvState extends State<SaleInv> {
 
   @override
   Widget build(BuildContext context) {
+    print(new DateFormat.d().format(new DateTime.now()));
     return Scaffold(
       body: Center(
           child: Form(
@@ -257,8 +268,8 @@ class SaleInvState extends State<SaleInv> {
                                   onPressed: () {
                                     setState(() {
                                       addVoucherTotal();
-                                      ListItemCode listUserStore = new ListItemCode(uSERSTORES: listItemsCode);
-                                      String jsonUserStore = jsonEncode(listUserStore);
+                                      // ListItemCode listUserStore = new ListItemCode(uSERSTORES: listItemsCode);
+                                      String jsonUserStore = jsonEncode(listItemsCode);
                                       print(jsonUserStore);
                                       addVoucher(jsonUserStore);
                                     });

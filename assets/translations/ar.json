@@ -25,13 +25,38 @@
   "SuccessfullyAddedDetails" : "أضف هذه العناصر بنجاح",
   "MyCart" : "عربة تسوقي",
   "Price" : "السعر",
-  "SubTotal" : "المجمو ",
+  "SubTotal" : "المجموع ",
   "ShipsFree" : "شحن مجاني",
   "TOTAL" : "المجموع",
   "TaxAmount" : "قيمة الضريبة",
   "DiscountTotal" : "إجمالي الخصم",
   "AfterDiscount" : "بعد الخصم",
   "Checkout" : "حفظ",
+  "MyOrder": "طلباتي",
   "Sorry" : "نعتذر",
-  "SorryDetails" : "لا يوجد منتج يحتوي على نفس الباركود المدخل"
+  "SorryDetails" : "لا يوجد منتج يحتوي على نفس الباركود المدخل",
+  "OrderDetails": "تفاصيل الطلب",
+  "States": "الحاله",
+  "approved": "مقبول",
+  "waiting": "انتظار",
+  "rejected": "مرفوض",
+  "All" : "الجميع",
+  "SalesInvoice": "فواتير المبيعات",
+  "SalesInvoiceDetails": "تفاصيل فاتورة المبيعات",
+  "Home": "الرئيسية",
+  "MyOrders": "طلباتي",
+  "Languages": "اللغة",
+  "From" : "من",
+  "To":"الى",
+  "FilterDate": "الحصول على البيانات على أساس التاريخ",
+  "Orderby": "طلب بتاريخ",
+  "OrderState": "حالة الطلبية",
+  "FilteStates": "الحصول على البيانات على أساس الحالة",
+  "SalesInvoicein": "فاتورة المبيعات في"
+
+
+
+
+
+
 }

@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stores_app/Module/ItemCode.dart';
+import 'package:stores_app/Module/MyOrdersDetailsModule.dart';
+import 'package:stores_app/Module/MyOrdersModule.dart';
 import 'package:stores_app/Module/UserAuth.dart';
 import 'package:stores_app/Module/UsersStores.dart';
 import 'Constants.dart';
@@ -40,15 +42,62 @@ class API {
      return res;
    }
 
-   static Future addVoucher(List<UsersStores> vouchers) async {
+   static Future addVoucher(vouchers) async {
      var body = {"ADD_VOUCHER": vouchers.toString()};
      final res = await http.post(ProductsNewOrder.addVoucher , body: body);
      print(ProductsNewOrder.addVoucher);
      print(res.statusCode);
-     print(vouchers);
-     print("response.body = " + res.body.toString());
      return res;
    }
+
+   static Future<List<MyOrdersModule>> getMyOrders(String dateFrom, String dateTo) async {
+     String data = "STORE_SERIAL=$serialNo&DATE_FROM="+"\"$dateFrom\"&DATE_TO=\"$dateTo\"";
+     final res = await http.get(Order.getOrdersUrl+data);
+     print(Order.getOrdersUrl+data);
+     if (res.statusCode == 200) {
+       Iterable list  = json.decode(res.body);
+       return list.map((users) => new MyOrdersModule.fromJson(users)).toList();
+     } else {
+       throw Exception('Failed to fetch data');
+     }
+   }
+
+   static Future<List<MyOrdersDetailsModule>> getMyOrderDetails(String voucherNo, String state) async {
+     String data = "STORE_SERIAL=$serialNo&VOUCHER_NO=$voucherNo&ORDER_STATE=$state";
+     final res = await http.get(Order.getMyOrderDetails+data);
+     print(Order.getMyOrderDetails+data);
+     if (res.statusCode == 200) {
+       Iterable list  = json.decode(res.body);
+       return list.map((users) => new MyOrdersDetailsModule.fromJson(users)).toList();
+     } else {
+       throw Exception('Failed to fetch data');
+     }
+   }
+
+   static Future<List<MyOrdersModule>>getSalesInvoice(String dateFrom, String dateTo) async {
+     String data = "STORE_SERIAL=$serialNo&DATE_FROM="+"\"$dateFrom\"&DATE_TO=\"$dateTo\"";
+     final res = await http.get(SalesInvoice.getSalesInvoice+data);
+     print(SalesInvoice.getSalesInvoice+data);
+     if (res.statusCode == 200) {
+       Iterable list  = json.decode(res.body);
+       return list.map((users) => new MyOrdersModule.fromJson(users)).toList();
+     } else {
+       throw Exception('Failed to fetch data');
+     }
+   }
+
+   static Future<List<MyOrdersDetailsModule>> getSalesInvoiceDetails(String voucherNo) async {
+     String data = "STORE_SERIAL=$serialNo&VOUCHER_NO=$voucherNo";
+     final res = await http.get(SalesInvoice.getSalesInvoiceDetails+data);
+     print(SalesInvoice.getSalesInvoiceDetails+data);
+     if (res.statusCode == 200) {
+       Iterable list  = json.decode(res.body);
+       return list.map((users) => new MyOrdersDetailsModule.fromJson(users)).toList();
+     } else {
+       throw Exception('Failed to fetch data');
+     }
+   }
+
 
 
    // static Future getSliderImg() async{
