@@ -19,6 +19,7 @@ class _OrderSalesInvoiceState extends State<OrderSalesInvoice> {
   var orders = new List<MyOrdersModule>();
   DateTime selectedDateFrom = DateTime.now();
   DateTime selectedDateTo = DateTime.now();
+  var listOrdersStoreItems = new Map<String, MyOrdersModule>();
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   _selectDateFrom(BuildContext context) async {
@@ -51,6 +52,10 @@ class _OrderSalesInvoiceState extends State<OrderSalesInvoice> {
     await API.getSalesInvoice(dataFrom , dataTo).then((response) {
       setState(() {
         orders = response;
+        orders.forEach((customer) => listOrdersStoreItems[customer.vOHNO] = customer);
+        print(listOrdersStoreItems);
+        orders.clear();
+        listOrdersStoreItems.forEach((k, v) => orders.add(v));
         print(" userStore = $orders");
       });
     });
@@ -74,71 +79,80 @@ class _OrderSalesInvoiceState extends State<OrderSalesInvoice> {
         length: 500,
         child: Scaffold(
           key: scaffoldKey,
-          body:Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left:8.0 , right: 8.0),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment:MainAxisAlignment.spaceBetween ,
-                      children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Text(
-                              "${AppLocalizations.of(context).translate('From')} :",
-                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              "${selectedDateFrom.toLocal()}".split(' ')[0],
-                              style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                            ),
-                            IconButton(
-                              onPressed: () => _selectDateFrom(context), // Refer step 3
-                              icon:Icon(Icons.date_range , color: Colors.lightGreen, )
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Text(
-                              "${AppLocalizations.of(context).translate('To')} :",
-                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              "${selectedDateTo.toLocal()}".split(' ')[0],
-                              style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                            ),
-                            IconButton(
-                                onPressed: () => _selectDateTo(context), // Refer step 3
-                                icon:Icon(Icons.date_range , color: Colors.lightGreen, )
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    RaisedButton(
-                      onPressed: () {
-                        String from = "${selectedDateFrom.toLocal()}".split(' ')[0];
-                        String to = "${selectedDateTo.toLocal()}".split(' ')[0];
-                        String dateFrom = DateFormat("dd/MM/yyyy").format(DateTime.parse(from));
-                        String dateTo = DateFormat("dd/MM/yyyy").format(DateTime.parse(to));
-                        getSalesInvoice(dateFrom,dateTo);
-                      }, // Refer step 3
-                      child: Text(
-                        "${AppLocalizations.of(context).translate('FilterDate')}",
-                        style:
-                        TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-                      ),
-                      color: Colors.lightGreen,
-                    ),
-                  ],
-                ),
+          body:Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Colors.white, Colors.lightGreen[200]]
               ),
-              getSnapshot(orders),
-            ],
+            ),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left:8.0 , right: 8.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment:MainAxisAlignment.spaceBetween ,
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Text(
+                                "${AppLocalizations.of(context).translate('From')} :",
+                                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                "${selectedDateFrom.toLocal()}".split(' ')[0],
+                                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                              ),
+                              IconButton(
+                                onPressed: () => _selectDateFrom(context), // Refer step 3
+                                icon:Icon(Icons.date_range , color: Colors.lightGreen, )
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Text(
+                                "${AppLocalizations.of(context).translate('To')} :",
+                                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                "${selectedDateTo.toLocal()}".split(' ')[0],
+                                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                              ),
+                              IconButton(
+                                  onPressed: () => _selectDateTo(context), // Refer step 3
+                                  icon:Icon(Icons.date_range , color: Colors.lightGreen, )
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      RaisedButton(
+                        onPressed: () {
+                          String from = "${selectedDateFrom.toLocal()}".split(' ')[0];
+                          String to = "${selectedDateTo.toLocal()}".split(' ')[0];
+                          String dateFrom = DateFormat("dd/MM/yyyy").format(DateTime.parse(from));
+                          String dateTo = DateFormat("dd/MM/yyyy").format(DateTime.parse(to));
+                          getSalesInvoice(dateFrom,dateTo);
+                        }, // Refer step 3
+                        child: Text(
+                          "${AppLocalizations.of(context).translate('FilterDate')}",
+                          style:
+                          TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                        color: Colors.lightGreen,
+                      ),
+                    ],
+                  ),
+                ),
+                getSnapshot(orders),
+              ],
+            ),
           )
         ),
       ),

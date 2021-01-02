@@ -18,7 +18,7 @@ enum StatesOrder { approved , waiting , rejected , all}
 class _MyOrdersDetailsState extends State<MyOrdersDetails> {
   var orders = new List<MyOrdersDetailsModule>();
   String vouchNo;
-  StatesOrder active = StatesOrder.waiting;
+  StatesOrder active = StatesOrder.all;
   List<Color> colorStates = new List<Color>();
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   List<MyOrdersDetailsModule> userStore = new List<MyOrdersDetailsModule>() ;
@@ -50,7 +50,7 @@ class _MyOrdersDetailsState extends State<MyOrdersDetails> {
       body: Scaffold(
         key: scaffoldKey,
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          // mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             filterStates(),
             if(userStore.isNotEmpty)
@@ -169,7 +169,7 @@ class _MyOrdersDetailsState extends State<MyOrdersDetails> {
 
   Widget getSnapshot(List<MyOrdersDetailsModule> myOrders) {
     return Container(
-      height: MediaQuery.of(context).size.height /2,
+      height: MediaQuery.of(context).size.height /1.5,
       margin: EdgeInsets.symmetric(horizontal: 28.0 , vertical: 5.0 ),
       child: ListView.builder(
         // controller: _controller,

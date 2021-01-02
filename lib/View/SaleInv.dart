@@ -181,110 +181,119 @@ class SaleInvState extends State<SaleInv> {
   Widget build(BuildContext context) {
     print(new DateFormat.d().format(new DateTime.now()));
     return Scaffold(
-      body: Center(
-          child: Form(
-            key: _formKey,
-            child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15.0, right: 15.0),
-                  child: Column(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
-                          child: Flex(
-                              direction: Axis.horizontal,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                SizedBox(
-                                  width: 200,
-                                  child: TextField(
-                                    controller: barCode,
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Colors.white, Colors.lightGreen[200]]
+          ),
+        ),
+        child: Center(
+            child: Form(
+              key: _formKey,
+              child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+                    child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
+                            child: Flex(
+                                direction: Axis.horizontal,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  SizedBox(
+                                    width: 200,
+                                    child: TextField(
+                                      controller: barCode,
+                                      decoration: InputDecoration(
+                                        border: OutlineInputBorder(),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: FlatButton(
-                                    child: Icon(Icons.casino_outlined, color: Colors.white),
-                                    color: Colors.lightGreen,
-                                    textColor: Colors.white,
-                                    height: 40,
-                                    minWidth: 25,
-                                    onPressed: () {
-                                      getItemByBarcode(barCode.text , context);
-                                    },
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: FlatButton(
+                                      child: Icon(Icons.casino_outlined, color: Colors.white),
+                                      color: Colors.lightGreen,
+                                      textColor: Colors.white,
+                                      height: 40,
+                                      minWidth: 25,
+                                      onPressed: () {
+                                        getItemByBarcode(barCode.text , context);
+                                      },
+                                    ),
                                   ),
-                                ),
-                              ]),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(30.0),
-                          child: Column(
-                              children: <Widget>[
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment
-                                        .spaceBetween,
-                                    children: <Widget>[
-                                      Expanded(child: Center(child: Text(
-                                        "${AppLocalizations.of(context).translate('Num')}" , textScaleFactor: 1.5,))),
-                                      Expanded(child: Center(child: Text(
-                                          "${AppLocalizations.of(context).translate('Name')}"  , textScaleFactor: 1.5))),
-                                      Expanded(child: Center(child: Text(
-                                          "${AppLocalizations.of(context).translate('Qty')}" , textScaleFactor: 1.5))),
-                                      // Text("",textScaleFactor: 1.5),
-                                      Expanded(child: Center(child: Text(
-                                          "${AppLocalizations.of(context).translate('delete')}"  , textScaleFactor: 1.5))),
-                                    ]
-                                ),
-                                Divider(
-                                    color: Colors.black12
-                                ),
-                                listViewTable(),
-                              ]),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                RaisedButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      qty.clear();
-                                      barCodeList.clear();
-                                      listItemsCode.clear();
-                                    });
-                                  },
-                                  textColor: Colors.white,
-                                  padding: const EdgeInsets.all(0.0),
-                                  color: Colors.red,
-                                  child: Text("${AppLocalizations.of(context).translate('ClearAll')}", style: TextStyle(
-                                      fontSize: 15)),
-                                ),
-                                RaisedButton(
-                                  color: Colors.lightGreen,
-                                  onPressed: () {
-                                    setState(() {
-                                      addVoucherTotal();
-                                      // ListItemCode listUserStore = new ListItemCode(uSERSTORES: listItemsCode);
-                                      String jsonUserStore = jsonEncode(listItemsCode);
-                                      print(jsonUserStore);
-                                      addVoucher(jsonUserStore);
-                                    });
-                                  },
-                                  textColor: Colors.white,
-                                  // padding: const EdgeInsets.all(20),
-                                  child: Text(
-                                      "${AppLocalizations.of(context).translate('Save')}", style: TextStyle(fontSize: 15)),
-                                ),
-                              ]),
-                        ),
-                      ]),
-                )
-            ),
-          )),
+                                ]),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(30.0),
+                            child: Column(
+                                children: <Widget>[
+                                  Row(
+                                      mainAxisAlignment: MainAxisAlignment
+                                          .spaceBetween,
+                                      children: <Widget>[
+                                        Expanded(child: Center(child: Text(
+                                          "${AppLocalizations.of(context).translate('Num')}" , textScaleFactor: 1.5,))),
+                                        Expanded(child: Center(child: Text(
+                                            "${AppLocalizations.of(context).translate('Name')}"  , textScaleFactor: 1.5))),
+                                        Expanded(child: Center(child: Text(
+                                            "${AppLocalizations.of(context).translate('Qty')}" , textScaleFactor: 1.5))),
+                                        // Text("",textScaleFactor: 1.5),
+                                        Expanded(child: Center(child: Text(
+                                            "${AppLocalizations.of(context).translate('delete')}"  , textScaleFactor: 1.5))),
+                                      ]
+                                  ),
+                                  Divider(
+                                      color: Colors.black12
+                                  ),
+                                  listViewTable(),
+                                ]),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  RaisedButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        qty.clear();
+                                        barCodeList.clear();
+                                        listItemsCode.clear();
+                                      });
+                                    },
+                                    textColor: Colors.white,
+                                    padding: const EdgeInsets.all(0.0),
+                                    color: Colors.red,
+                                    child: Text("${AppLocalizations.of(context).translate('ClearAll')}", style: TextStyle(
+                                        fontSize: 15)),
+                                  ),
+                                  RaisedButton(
+                                    color: Colors.lightGreen,
+                                    onPressed: () {
+                                      setState(() {
+                                        addVoucherTotal();
+                                        // ListItemCode listUserStore = new ListItemCode(uSERSTORES: listItemsCode);
+                                        String jsonUserStore = jsonEncode(listItemsCode);
+                                        print(jsonUserStore);
+                                        addVoucher(jsonUserStore);
+                                      });
+                                    },
+                                    textColor: Colors.white,
+                                    // padding: const EdgeInsets.all(20),
+                                    child: Text(
+                                        "${AppLocalizations.of(context).translate('Save')}", style: TextStyle(fontSize: 15)),
+                                  ),
+                                ]),
+                          ),
+                        ]),
+                  )
+              ),
+            )),
+      ),
     );
   }
 

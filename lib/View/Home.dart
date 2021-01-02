@@ -91,6 +91,13 @@ class _HomeState extends State<Home> {
                   //padding: EdgeInsets.only(top: 100),
                   height: MediaQuery.of(context).size.height,
                   width: double.infinity,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [Colors.white, Colors.lightGreen]
+                    ),
+                  ),
                   child: _children[_currentIndex] ,
                 ),
               ],
